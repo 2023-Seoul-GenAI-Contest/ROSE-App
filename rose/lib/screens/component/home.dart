@@ -1,0 +1,271 @@
+import 'package:flutter/material.dart';
+import 'package:rose/models/color.dart';
+import 'package:rose/screens/component/recommand.dart';
+import 'package:rose/utilities/utility.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
+
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      Container(
+        height: 16,
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+              width: MediaQuery.of(context).size.width - 230,
+              decoration: BoxDecoration(
+                color: fromHex('#FFFFFF'),
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: TextButton(
+                  onPressed: () async {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => const Recommand()));
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 12,
+                      ),
+                      Image.asset(
+                        'assets/img/recommand.png',
+                        fit: BoxFit.cover,
+                        height: 140,
+                      ),
+                      Container(
+                        height: 10,
+                      ),
+                      Text(
+                        "강의 추천",
+                        style: TextStyle(
+                          fontFamily: "medium",
+                          fontSize: 24,
+                          color: fromHex(GrayScale.Black),
+                        ),
+                      ),
+                      Container(
+                        height: 10,
+                      ),
+                    ],
+                  ))),
+          Container(
+              width: MediaQuery.of(context).size.width - 230,
+              decoration: BoxDecoration(
+                color: fromHex('#FFFFFF'),
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: TextButton(
+                  onPressed: () async {
+                    String _url = 'https://sdfedu.seoul.kr/main/index.jsp';
+                    if (await canLaunchUrlString(_url)) {
+                      await launchUrlString(_url,
+                          mode: LaunchMode.externalApplication);
+                    }
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 12,
+                      ),
+                      Image.asset(
+                        'assets/img/recommand.png',
+                        fit: BoxFit.cover,
+                        height: 140,
+                      ),
+                      Container(
+                        height: 10,
+                      ),
+                      Text(
+                        "강의 추천",
+                        style: TextStyle(
+                          fontFamily: "medium",
+                          fontSize: 24,
+                          color: fromHex(GrayScale.Black),
+                        ),
+                      ),
+                      Container(
+                        height: 10,
+                      ),
+                    ],
+                  ))),
+        ],
+      ),
+      Container(height: 16),
+      Center(
+        child: Container(
+            height: 50,
+            width: MediaQuery.of(context).size.width - 30,
+            decoration: BoxDecoration(
+              color: fromHex('#040C56'),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 1,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
+            child: TextButton(
+                onPressed: () async {
+                  String _url = 'https://sdfedu.seoul.kr/main/index.jsp';
+                  if (await canLaunchUrlString(_url)) {
+                    await launchUrlString(_url,
+                        mode: LaunchMode.externalApplication);
+                  }
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 6,
+                    ),
+                    SvgPicture.asset(
+                      'assets/img/campus.svg',
+                      height: 30,
+                    ),
+                    Container(
+                      width: 10,
+                    ),
+                    Text(
+                      "에듀테크 캠퍼스 바로가기",
+                      style: TextStyle(
+                        fontFamily: "medium",
+                        fontSize: 14,
+                        color: fromHex(GrayScale.White),
+                      ),
+                    ),
+                  ],
+                ))),
+      ),
+      Container(height: 12),
+      Container(
+          height: 50,
+          width: MediaQuery.of(context).size.width - 30,
+          decoration: BoxDecoration(
+            color: fromHex('#94B2FF'),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 1,
+                blurRadius: 7,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
+          child: TextButton(
+              onPressed: () async {
+                String _url =
+                    'https://sdfedu.seoul.kr/main/page.jsp?pid=course1.exam&cid=2';
+                if (await canLaunchUrlString(_url)) {
+                  await launchUrlString(_url,
+                      mode: LaunchMode.externalApplication);
+                }
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 6,
+                  ),
+                  SvgPicture.asset(
+                    'assets/img/graph.svg',
+                    height: 34,
+                  ),
+                  Container(
+                    width: 10,
+                  ),
+                  Text(
+                    "디지털 역량 평가 하러 가기",
+                    style: TextStyle(
+                      fontFamily: "medium",
+                      fontSize: 14,
+                      color: fromHex(GrayScale.Black),
+                    ),
+                  ),
+                ],
+              ))),
+      Container(height: 12),
+      Container(
+          height: 50,
+          width: MediaQuery.of(context).size.width - 30,
+          decoration: BoxDecoration(
+            color: fromHex('#F23000'),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 1,
+                blurRadius: 7,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
+          child: TextButton(
+              onPressed: () async {
+                String _url =
+                    'https://www.youtube.com/channel/UCWFbtG6p3zGtJWT6VPsmMdw';
+                if (await canLaunchUrlString(_url)) {
+                  await launchUrlString(_url,
+                      mode: LaunchMode.externalApplication);
+                }
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 3,
+                  ),
+                  Image.asset(
+                    'assets/img/ico_gnb_yt.png',
+                    fit: BoxFit.cover,
+                    height: 40,
+                  ),
+                  Container(
+                    width: 8,
+                  ),
+                  Text(
+                    "에듀테크 캠퍼스 유튜브 바로가기",
+                    style: TextStyle(
+                      fontFamily: "medium",
+                      fontSize: 14,
+                      color: fromHex(GrayScale.White),
+                    ),
+                  ),
+                ],
+              ))),
+    ]);
+  }
+}
