@@ -3,8 +3,8 @@ import 'package:rose/models/color.dart';
 import 'package:rose/utilities/utility.dart';
 
 class Recommand extends StatefulWidget {
-  const Recommand({Key? key}) : super(key: key);
-
+  const Recommand({Key? key, required this.changeIndex}) : super(key: key);
+  final Function changeIndex;
   @override
   _RecommandState createState() => _RecommandState();
 }
@@ -12,6 +12,6 @@ class Recommand extends StatefulWidget {
 class _RecommandState extends State<Recommand> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(child: Text("recommand"));
   }
 }
