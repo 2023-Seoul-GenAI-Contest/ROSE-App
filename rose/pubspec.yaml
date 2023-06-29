@@ -37,6 +37,7 @@ dependencies:
   flutter_svg:
   url_launcher:
   percent_indicator: ^4.2.3
+  http:
 
 dev_dependencies:
   flutter_test:

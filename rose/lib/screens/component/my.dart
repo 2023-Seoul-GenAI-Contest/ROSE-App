@@ -17,7 +17,7 @@ class _MyState extends State<My> {
   String birth = "1999.01.01";
   int enterLec = 10;
   int finshLec = 3;
-  double percent = 40 / 40;
+  double percent = 5 / 40;
 
   String convertBirth(String birth) {
     String result = "";
@@ -236,7 +236,11 @@ class _MyState extends State<My> {
                     color: fromHex(GrayScale.Black),
                   ),
                 ),
+                Container(
+                  height: 20,
+                ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Image.asset(
                       'assets/img/bronze.png',
@@ -301,6 +305,7 @@ class _MyState extends State<My> {
                   width: 15,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Image.asset(
                       'assets/img/bronze.png',
@@ -324,21 +329,24 @@ class _MyState extends State<My> {
                     ),
                   ],
                 ),
+                Container(
+                  width: 15,
+                ),
                 Column(
                   children: [
                     Container(
-                      alignment: FractionalOffset(percent, 1 - percent),
+                      alignment: FractionalOffset(percent - 0.07, 1 - percent),
                       child: FractionallySizedBox(
                           child: Image.asset('assets/img/my-pregress.png',
                               height: 50, fit: BoxFit.cover)),
                     ),
                     LinearPercentIndicator(
-                      padding: EdgeInsets.zero,
+                      padding: EdgeInsets.only(left: 20),
                       percent: percent,
                       lineHeight: 10,
                       backgroundColor: Colors.black38,
                       progressColor: Colors.indigo.shade900,
-                      width: MediaQuery.of(context).size.width - 30,
+                      width: MediaQuery.of(context).size.width - 50,
                     )
                   ],
                 ),

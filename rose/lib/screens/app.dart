@@ -89,22 +89,24 @@ class _AppState extends State<App> {
           ),
           toolbarHeight: 70,
         ),
-        body: (() {
-          switch (_pageIndex) {
-            case 0:
-              return Home(changeIndex: changeIndex);
-            case 2:
-              return My(changeIndex: changeIndex);
-            case 3:
-              return Recommand(changeIndex: changeIndex);
-            case 4:
-              return LectureMain(changeIndex: changeIndex);
-            case 5:
-              return ChatVoice(changeIndex: changeIndex);
-            case 6:
-              return ChatText(changeIndex: changeIndex);
-          }
-        })(),
+        body: ListView(children: [
+          Container(child: (() {
+            switch (_pageIndex) {
+              case 0:
+                return Home(changeIndex: changeIndex);
+              case 2:
+                return My(changeIndex: changeIndex);
+              case 3:
+                return Recommand(changeIndex: changeIndex);
+              case 4:
+                return LectureMain(changeIndex: changeIndex);
+              case 5:
+                return ChatVoice(changeIndex: changeIndex);
+              case 6:
+                return ChatText(changeIndex: changeIndex);
+            }
+          })())
+        ]),
         floatingActionButton: FloatingActionButton.large(
           backgroundColor: _pageIndex == 5 || _pageIndex == 6
               ? fromHex('#94B2FF')

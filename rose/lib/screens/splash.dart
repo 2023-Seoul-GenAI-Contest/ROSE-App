@@ -36,10 +36,10 @@ class _SplashState extends State<Splash> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Container(
-              height: 200,
+              height: 150,
             ),
             Container(
-              height: 200,
+              height: 198,
               margin: const EdgeInsets.only(left: 10),
               // alignment: Alignment.center,
               child: Image.asset(
