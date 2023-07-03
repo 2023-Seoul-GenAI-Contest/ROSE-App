@@ -1,4 +1,4 @@
 class BaseApiInterface {
-  String baseUrl = "https://api.github.com";
+  String baseUrl = "http://10.0.2.2";
   String basePort = "8080";
 }

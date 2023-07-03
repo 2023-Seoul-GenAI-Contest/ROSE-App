@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rose/models/color.dart';
+import 'package:rose/screens/component/lecture/lecture_video.dart';
 import 'package:rose/utilities/utility.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -143,10 +144,11 @@ class _LectureMainState extends State<LectureMain> {
                               ),
                               child: TextButton(
                                   onPressed: () async {
-                                    if (await canLaunchUrlString(videoLink)) {
-                                      await launchUrlString(videoLink,
-                                          mode: LaunchMode.externalApplication);
-                                    }
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const VideoApp()));
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,

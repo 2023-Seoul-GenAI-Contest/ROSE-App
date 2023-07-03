@@ -38,6 +38,7 @@ dependencies:
   url_launcher:
   percent_indicator: ^4.2.3
   http:
+  video_player:
 
 dev_dependencies:
   flutter_test:
