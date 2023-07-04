@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:rose/api/user.dart';
+import 'package:rose/data/user.dart';
 import 'package:rose/models/color.dart';
 import 'package:rose/utilities/utility.dart';
 
@@ -11,23 +13,30 @@ class My extends StatefulWidget {
 }
 
 class _MyState extends State<My> {
-  String name = "김지원";
-  String email = "asdf1234@naver.com";
-  String phone = "010-1234-5678";
-  String birth = "1999.01.01";
-  int enterLec = 10;
-  int finshLec = 3;
+  String? name;
+  String? email;
+  String? phone;
+  int? enterLec;
+  int? finshLec;
   double percent = 5 / 40;
 
-  String convertBirth(String birth) {
-    String result = "";
-    result = birth.substring(0, 4) +
-        "년 " +
-        birth.substring(5, 7) +
-        "월 " +
-        birth.substring(8, 10) +
-        "일";
-    return result;
+  void setUser() async {
+    final user = await UserApi().getUserInfo(1);
+    setState(() {
+      if (user != null) {
+        name = user.name;
+        email = user.email;
+        phone = user.phone;
+        enterLec = user.enrollLecture;
+        finshLec = user.finshLecture;
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setUser();
   }
 
   @override
@@ -66,7 +75,7 @@ class _MyState extends State<My> {
               ],
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
                   width: 10,
@@ -88,12 +97,12 @@ class _MyState extends State<My> {
                       "나의 정보",
                       style: TextStyle(
                         fontFamily: "medium",
-                        fontSize: 16,
+                        fontSize: 20,
                         color: fromHex(GrayScale.Black),
                       ),
                     ),
                     Container(
-                      height: 10,
+                      height: 15,
                     ),
                     Row(
                       children: [
@@ -106,7 +115,7 @@ class _MyState extends State<My> {
                                   "회원명",
                                   style: TextStyle(
                                     fontFamily: "medium",
-                                    fontSize: 12,
+                                    fontSize: 15,
                                     color: fromHex(GrayScale.Black),
                                   ),
                                 ),
@@ -117,7 +126,7 @@ class _MyState extends State<My> {
                                   "이메일",
                                   style: TextStyle(
                                     fontFamily: "medium",
-                                    fontSize: 12,
+                                    fontSize: 15,
                                     color: fromHex(GrayScale.Black),
                                   ),
                                 ),
@@ -128,18 +137,7 @@ class _MyState extends State<My> {
                                   "휴대폰",
                                   style: TextStyle(
                                     fontFamily: "medium",
-                                    fontSize: 12,
-                                    color: fromHex(GrayScale.Black),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(bottom: 8),
-                                child: Text(
-                                  "생년월일",
-                                  style: TextStyle(
-                                    fontFamily: "medium",
-                                    fontSize: 12,
+                                    fontSize: 15,
                                     color: fromHex(GrayScale.Black),
                                   ),
                                 ),
@@ -154,7 +152,18 @@ class _MyState extends State<My> {
                             Container(
                               margin: EdgeInsets.only(bottom: 8),
                               child: Text(
-                                name,
+                                name ?? "",
+                                style: TextStyle(
+                                  fontFamily: "medium",
+                                  fontSize: 15,
+                                  color: fromHex(GrayScale.Black),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(bottom: 8),
+                              child: Text(
+                                email ?? "",
                                 style: TextStyle(
                                   fontFamily: "medium",
                                   fontSize: 12,
@@ -165,32 +174,10 @@ class _MyState extends State<My> {
                             Container(
                               margin: EdgeInsets.only(bottom: 8),
                               child: Text(
-                                email,
+                                phone ?? "",
                                 style: TextStyle(
                                   fontFamily: "medium",
-                                  fontSize: 12,
-                                  color: fromHex(GrayScale.Black),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(bottom: 8),
-                              child: Text(
-                                phone,
-                                style: TextStyle(
-                                  fontFamily: "medium",
-                                  fontSize: 12,
-                                  color: fromHex(GrayScale.Black),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(bottom: 8),
-                              child: Text(
-                                convertBirth(birth),
-                                style: TextStyle(
-                                  fontFamily: "medium",
-                                  fontSize: 12,
+                                  fontSize: 15,
                                   color: fromHex(GrayScale.Black),
                                 ),
                               ),
