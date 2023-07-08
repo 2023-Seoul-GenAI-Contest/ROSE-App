@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:rose/api/chat.dart';
+import 'package:rose/data/chat.dart';
 import 'package:rose/models/color.dart';
+import 'package:rose/screens/component/chat_hist.dart';
 import 'package:rose/screens/component/recommand.dart';
 import 'package:rose/utilities/utility.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,9 +18,25 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<ChatHistVO> chatHistList = [];
+  void getChatHist() async {
+    final chatHist = await ChatApi().getChatHist(1);
+    setState(() {
+      if (chatHist != null) {
+        chatHistList = chatHist;
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getChatHist();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
+    return ListView(children: [
       Container(
         height: 16,
       ),
@@ -186,353 +205,195 @@ class _HomeState extends State<Home> {
                 ))),
       ),
       Container(height: 12),
-      Container(
-          height: 50,
-          width: MediaQuery.of(context).size.width - 30,
-          decoration: BoxDecoration(
-            color: fromHex('#94B2FF'),
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 1,
-                blurRadius: 7,
-                offset: Offset(0, 3), // changes position of shadow
-              ),
-            ],
-          ),
-          child: TextButton(
-              onPressed: () async {
-                String _url =
-                    'https://sdfedu.seoul.kr/main/page.jsp?pid=course1.exam&cid=2';
-                if (await canLaunchUrlString(_url)) {
-                  await launchUrlString(_url,
-                      mode: LaunchMode.externalApplication);
-                }
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 6,
-                  ),
-                  SvgPicture.asset(
-                    'assets/img/graph.svg',
-                    height: 34,
-                  ),
-                  Container(
-                    width: 10,
-                  ),
-                  Text(
-                    "디지털 역량 평가 하러 가기",
-                    style: TextStyle(
-                      fontFamily: "medium",
-                      fontSize: 14,
-                      color: fromHex(GrayScale.Black),
+      Center(
+        child: Container(
+            height: 50,
+            width: MediaQuery.of(context).size.width - 30,
+            decoration: BoxDecoration(
+              color: fromHex('#94B2FF'),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 1,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
+            child: TextButton(
+                onPressed: () async {
+                  String _url =
+                      'https://sdfedu.seoul.kr/main/page.jsp?pid=course1.exam&cid=2';
+                  if (await canLaunchUrlString(_url)) {
+                    await launchUrlString(_url,
+                        mode: LaunchMode.externalApplication);
+                  }
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 6,
                     ),
-                  ),
-                ],
-              ))),
-      Container(height: 12),
-      Container(
-          height: 50,
-          width: MediaQuery.of(context).size.width - 30,
-          decoration: BoxDecoration(
-            color: fromHex('#F23000'),
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 1,
-                blurRadius: 7,
-                offset: Offset(0, 3), // changes position of shadow
-              ),
-            ],
-          ),
-          child: TextButton(
-              onPressed: () async {
-                String _url =
-                    'https://www.youtube.com/channel/UCWFbtG6p3zGtJWT6VPsmMdw';
-                if (await canLaunchUrlString(_url)) {
-                  await launchUrlString(_url,
-                      mode: LaunchMode.externalApplication);
-                }
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 3,
-                  ),
-                  Image.asset(
-                    'assets/img/ico_gnb_yt.png',
-                    fit: BoxFit.cover,
-                    height: 40,
-                  ),
-                  Container(
-                    width: 8,
-                  ),
-                  Text(
-                    "에듀테크 캠퍼스 유튜브 바로가기",
-                    style: TextStyle(
-                      fontFamily: "medium",
-                      fontSize: 14,
-                      color: fromHex(GrayScale.White),
+                    SvgPicture.asset(
+                      'assets/img/graph.svg',
+                      height: 34,
                     ),
-                  ),
-                ],
-              ))),
-      Container(height: 20),
-      Text(
-        "지금까지 월디에게 물어본 것",
-        style: TextStyle(
-          fontFamily: "medium",
-          fontSize: 15,
-          color: fromHex(GrayScale.Black),
-        ),
+                    Container(
+                      width: 10,
+                    ),
+                    Text(
+                      "디지털 역량 평가 하러 가기",
+                      style: TextStyle(
+                        fontFamily: "medium",
+                        fontSize: 14,
+                        color: fromHex(GrayScale.Black),
+                      ),
+                    ),
+                  ],
+                ))),
       ),
-      Container(
-        width: 12,
+      Container(height: 12),
+      Center(
+        child: Container(
+            height: 50,
+            width: MediaQuery.of(context).size.width - 30,
+            decoration: BoxDecoration(
+              color: fromHex('#F23000'),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 1,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
+            child: TextButton(
+                onPressed: () async {
+                  String _url =
+                      'https://www.youtube.com/channel/UCWFbtG6p3zGtJWT6VPsmMdw';
+                  if (await canLaunchUrlString(_url)) {
+                    await launchUrlString(_url,
+                        mode: LaunchMode.externalApplication);
+                  }
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 3,
+                    ),
+                    Image.asset(
+                      'assets/img/ico_gnb_yt.png',
+                      fit: BoxFit.cover,
+                      height: 40,
+                    ),
+                    Container(
+                      width: 8,
+                    ),
+                    Text(
+                      "에듀테크 캠퍼스 유튜브 바로가기",
+                      style: TextStyle(
+                        fontFamily: "medium",
+                        fontSize: 14,
+                        color: fromHex(GrayScale.White),
+                      ),
+                    ),
+                  ],
+                ))),
+      ),
+      Container(height: 20),
+      Center(
+        child: Text(
+          "지금까지 월디에게 물어본 것",
+          style: TextStyle(
+            fontFamily: "medium",
+            fontSize: 15,
+            color: fromHex(GrayScale.Black),
+          ),
+        ),
       ),
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.all(8),
         child: Row(children: [
-          Container(
-              height: 150,
-              width: MediaQuery.of(context).size.width - 30,
-              decoration: BoxDecoration(
-                color: fromHex('#FFFFFF'),
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 1,
-                    blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 10,
-                  ),
-                  Text(
-                    "질문 11",
-                    style: TextStyle(
-                      fontFamily: "medium",
-                      fontSize: 16,
-                      color: fromHex(GrayScale.Black),
+          for (var chatHist in chatHistList) ...[
+            Container(
+                height: 150,
+                width: MediaQuery.of(context).size.width - 30,
+                decoration: BoxDecoration(
+                  color: fromHex('#FFFFFF'),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
                     ),
-                  ),
-                  Container(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                          height: 60,
-                          width: MediaQuery.of(context).size.width - 260,
-                          decoration: BoxDecoration(
-                            color: fromHex('#040C56'),
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "추천 강의",
-                                    style: TextStyle(
-                                      fontFamily: "medium",
-                                      fontSize: 14,
-                                      color: fromHex(GrayScale.White),
-                                    ),
-                                  ),
-                                  Text(
-                                    "보러 가기",
-                                    style: TextStyle(
-                                      fontFamily: "medium",
-                                      fontSize: 14,
-                                      color: fromHex(GrayScale.White),
-                                    ),
-                                  ),
-                                ],
-                              ))),
-                      Container(
-                          height: 60,
-                          width: MediaQuery.of(context).size.width - 260,
-                          decoration: BoxDecoration(
-                            color: fromHex('#040C56'),
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "답변",
-                                    style: TextStyle(
-                                      fontFamily: "medium",
-                                      fontSize: 14,
-                                      color: fromHex(GrayScale.White),
-                                    ),
-                                  ),
-                                  Text(
-                                    "보러 가기",
-                                    style: TextStyle(
-                                      fontFamily: "medium",
-                                      fontSize: 14,
-                                      color: fromHex(GrayScale.White),
-                                    ),
-                                  ),
-                                ],
-                              ))),
-                    ],
-                  ),
-                ],
-              )),
-          Container(width: 12),
-          Container(
-              height: 150,
-              width: MediaQuery.of(context).size.width - 30,
-              decoration: BoxDecoration(
-                color: fromHex('#FFFFFF'),
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 1,
-                    blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 10,
-                  ),
-                  Text(
-                    "질문 11",
-                    style: TextStyle(
-                      fontFamily: "medium",
-                      fontSize: 16,
-                      color: fromHex(GrayScale.Black),
+                  ],
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 10,
                     ),
-                  ),
-                  Container(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                          height: 60,
-                          width: MediaQuery.of(context).size.width - 260,
-                          decoration: BoxDecoration(
-                            color: fromHex('#040C56'),
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "추천 강의",
-                                    style: TextStyle(
-                                      fontFamily: "medium",
-                                      fontSize: 14,
-                                      color: fromHex(GrayScale.White),
-                                    ),
+                    Text(
+                      chatHist.text.toString(),
+                      style: TextStyle(
+                        fontFamily: "medium",
+                        fontSize: 16,
+                        color: fromHex(GrayScale.Black),
+                      ),
+                    ),
+                    Container(
+                      height: 20,
+                    ),
+                    Container(
+                        height: 60,
+                        width: MediaQuery.of(context).size.width - 200,
+                        decoration: BoxDecoration(
+                          color: fromHex('#040C56'),
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 1,
+                              blurRadius: 7,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ChatHist(
+                                          sessionId: chatHist.sessionId ?? 0)));
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "답변 보러 가기",
+                                  style: TextStyle(
+                                    fontFamily: "medium",
+                                    fontSize: 18,
+                                    color: fromHex(GrayScale.White),
                                   ),
-                                  Text(
-                                    "보러 가기",
-                                    style: TextStyle(
-                                      fontFamily: "medium",
-                                      fontSize: 14,
-                                      color: fromHex(GrayScale.White),
-                                    ),
-                                  ),
-                                ],
-                              ))),
-                      Container(
-                          height: 60,
-                          width: MediaQuery.of(context).size.width - 260,
-                          decoration: BoxDecoration(
-                            color: fromHex('#040C56'),
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "답변",
-                                    style: TextStyle(
-                                      fontFamily: "medium",
-                                      fontSize: 14,
-                                      color: fromHex(GrayScale.White),
-                                    ),
-                                  ),
-                                  Text(
-                                    "보러 가기",
-                                    style: TextStyle(
-                                      fontFamily: "medium",
-                                      fontSize: 14,
-                                      color: fromHex(GrayScale.White),
-                                    ),
-                                  ),
-                                ],
-                              ))),
-                    ],
-                  ),
-                ],
-              )),
+                                ),
+                              ],
+                            ))),
+                  ],
+                )),
+            Container(width: 12),
+          ]
         ]),
       )
     ]);

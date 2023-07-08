@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:rose/api/chat.dart';
 import 'package:rose/models/color.dart';
 import 'package:rose/utilities/utility.dart';
+import 'package:record/record.dart';
 
 class ChatVoice extends StatefulWidget {
   const ChatVoice({Key? key, required this.changeIndex}) : super(key: key);
@@ -10,6 +12,49 @@ class ChatVoice extends StatefulWidget {
 }
 
 class _ChatVoiceState extends State<ChatVoice> {
+  final _audioRecorder = Record();
+  bool _isRecording = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _audioRecorder.dispose();
+    super.dispose();
+  }
+
+  Future<void> _start() async {
+    if (await _audioRecorder.hasPermission()) {
+      // We don't do anything with this but printing
+      final isSupported = await _audioRecorder.isEncoderSupported(
+        AudioEncoder.aacLc,
+      );
+
+      // final devs = await _audioRecorder.listInputDevices();
+      // final isRecording = await _audioRecorder.isRecording();
+
+      await _audioRecorder.start(
+        path: 'aFullPath/voice.aac',
+      );
+    }
+  }
+
+  Future<void> _stop() async {
+    final path = await _audioRecorder.stop();
+    final getRes = await ChatApi().getChatVoice(path ?? '');
+  }
+
+  Future<void> _pause() async {
+    await _audioRecorder.pause();
+  }
+
+  Future<void> _resume() async {
+    await _audioRecorder.resume();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,9 +84,6 @@ class _ChatVoiceState extends State<ChatVoice> {
                   'assets/img/introduce.png',
                   fit: BoxFit.cover,
                   height: 110,
-                ),
-                Container(
-                  width: 15,
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -132,14 +174,22 @@ class _ChatVoiceState extends State<ChatVoice> {
                     Container(
                       height: 10,
                     ),
-                    IconButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              fromHex('#FFB4B4')),
-                        ),
-                        color: fromHex('#FFB4B4'),
-                        onPressed: () => {},
-                        icon: const Icon(Icons.mic)),
+                    SizedBox(
+                      height: 40,
+                      child: IconButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                fromHex('#FFB4B4')),
+                          ),
+                          color: fromHex('#FFB4B4'),
+                          onPressed: () => {
+                                _isRecording ? _stop() : _start(),
+                                setState(() {
+                                  _isRecording = !_isRecording;
+                                })
+                              },
+                          icon: const Icon(Icons.mic)),
+                    ),
                     Container(
                       height: 10,
                     ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rose/screens/splash.dart';
 
 void main() {
@@ -11,9 +13,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'ROSE',
-      home: Splash(),
+      home: LoaderOverlay(child: Splash()),
+      builder: EasyLoading.init(),
     );
   }
 }

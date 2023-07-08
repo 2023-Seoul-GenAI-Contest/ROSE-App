@@ -36,7 +36,7 @@ class _SplashState extends State<Splash> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Container(
-              height: 150,
+              height: 170,
             ),
             Container(
               height: 198,

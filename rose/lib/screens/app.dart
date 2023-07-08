@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rose/models/color.dart';
+import 'package:rose/screens/component/chat_hist.dart';
 import 'package:rose/screens/component/chat_text.dart';
 import 'package:rose/screens/component/chat_voice.dart';
 import 'package:rose/screens/component/home.dart';
@@ -35,6 +36,8 @@ class _AppState extends State<App> {
         _selectedIndex = index;
         _showChatText = "월디에게 물어보세요!";
       });
+    } else {
+      changeChatMode(_pageIndex);
     }
   }
 
@@ -74,12 +77,17 @@ class _AppState extends State<App> {
       setState(() {
         _pageIndex = 6;
       });
+    } else if (index == "chat_hist") {
+      setState(() {
+        _pageIndex = 7;
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 255, 255, 255),
           title: Image.asset(
@@ -89,46 +97,46 @@ class _AppState extends State<App> {
           ),
           toolbarHeight: 70,
         ),
-        body: ListView(children: [
-          Container(child: (() {
-            switch (_pageIndex) {
-              case 0:
-                return Home(changeIndex: changeIndex);
-              case 2:
-                return My(changeIndex: changeIndex);
-              case 3:
-                return Recommand(changeIndex: changeIndex);
-              case 4:
-                return LectureMain(changeIndex: changeIndex);
-              case 5:
-                return ChatVoice(changeIndex: changeIndex);
-              case 6:
-                return ChatText(changeIndex: changeIndex);
-            }
-          })())
-        ]),
-        floatingActionButton: FloatingActionButton.large(
-          backgroundColor: _pageIndex == 5 || _pageIndex == 6
-              ? fromHex('#94B2FF')
-              : fromHex('#040C56'),
-          onPressed: () {
-            changeChatMode(_pageIndex);
-          },
-          child: _pageIndex == 5
-              ? Image.asset(
-                  'assets/img/center-chat.png',
-                  height: 140,
-                )
-              : _pageIndex == 6
-                  ? Image.asset(
-                      'assets/img/center-voice.png',
-                      height: 140,
-                    )
-                  : Image.asset(
-                      'assets/img/center-btn.png',
-                      height: 140,
-                    ),
-        ),
+        body: Container(child: (() {
+          switch (_pageIndex) {
+            case 0:
+              return Home(changeIndex: changeIndex);
+            case 2:
+              return My(changeIndex: changeIndex);
+            case 3:
+              return Recommand(changeIndex: changeIndex);
+            case 4:
+              return LectureMain(changeIndex: changeIndex);
+            case 5:
+              return ChatVoice(changeIndex: changeIndex);
+            case 6:
+              return ChatText(changeIndex: changeIndex);
+          }
+        })()),
+        floatingActionButton: _pageIndex != 5 && _pageIndex != 6
+            ? FloatingActionButton.large(
+                backgroundColor: _pageIndex == 5 || _pageIndex == 6
+                    ? fromHex('#94B2FF')
+                    : fromHex('#040C56'),
+                onPressed: () {
+                  changeChatMode(_pageIndex);
+                },
+                child: _pageIndex == 5
+                    ? Image.asset(
+                        'assets/img/center-chat.png',
+                        height: 140,
+                      )
+                    : _pageIndex == 6
+                        ? Image.asset(
+                            'assets/img/center-voice.png',
+                            height: 140,
+                          )
+                        : Image.asset(
+                            'assets/img/center-btn.png',
+                            height: 140,
+                          ),
+              )
+            : null,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: SizedBox(
             height: 80,
@@ -141,7 +149,11 @@ class _AppState extends State<App> {
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
-                  icon: const Icon(Icons.search, size: 40),
+                  icon: _pageIndex == 5
+                      ? const Icon(Icons.message, size: 40)
+                      : _pageIndex == 6
+                          ? const Icon(Icons.mic, size: 40)
+                          : const Icon(Icons.search, size: 40),
                   label: _showChatText,
                 ),
                 const BottomNavigationBarItem(
