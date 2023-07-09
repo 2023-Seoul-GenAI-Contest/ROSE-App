@@ -205,7 +205,7 @@ class _LectureSummeryState extends State<LectureSummery> {
                             "생성형 AI가 강의 내용을 요약하고 있어요.",
                             style: TextStyle(
                               fontFamily: "medium",
-                              fontSize: 18,
+                              fontSize: 14,
                               color: fromHex(GrayScale.Black),
                             ),
                           ))),

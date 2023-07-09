@@ -30,6 +30,26 @@ class LectureApi {
     }
   }
 
+  Future<List<LectureListVO>> getLectureRecommandlist(
+      String category, String level) async {
+    List<LectureListVO> lectureList = [];
+    var url = Uri.parse(
+        baseUrl + '/lecture/detail?category=' + category + '&level=' + level);
+    http.Response response = await http.get(url);
+    if (response.statusCode == 200) {
+      var responseBody = utf8.decode(response.bodyBytes);
+      var jsonBody = jsonDecode(responseBody);
+      for (var item in jsonBody) {
+        print(item['lectureId']);
+        lectureList.add(LectureListVO.fromJson(item));
+      }
+      return lectureList;
+    } else {
+      print(response.reasonPhrase);
+      return lectureList;
+    }
+  }
+
   Future<List<LectureDetailVO>> getLectureDetail(int lectureId) async {
     List<LectureDetailVO> lectureDetailList = [];
     var url = Uri.parse(baseUrl + '/lecture/detail/' + lectureId.toString());

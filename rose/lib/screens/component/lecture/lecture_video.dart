@@ -214,7 +214,7 @@ class _VideoAppState extends State<VideoApp> {
                             "생성형 AI가 키워드를 만들고 있어요.",
                             style: TextStyle(
                               fontFamily: "medium",
-                              fontSize: 18,
+                              fontSize: 14,
                               color: fromHex(GrayScale.Black),
                             ),
                           ))),

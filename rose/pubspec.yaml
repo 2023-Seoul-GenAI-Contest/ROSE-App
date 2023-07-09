@@ -44,6 +44,7 @@ dependencies:
   flutter_easyloading:
   group_button:
   loader_overlay:
+  path_provider:
 
 dev_dependencies:
   flutter_test:

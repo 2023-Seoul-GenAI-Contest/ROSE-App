@@ -15,7 +15,6 @@ class ChatText extends StatefulWidget {
 }
 
 class _ChatTextState extends State<ChatText> {
-  late final getChatRes = getChat();
   List messageList = [];
   int? sessionId;
   int msgNum = 1;
@@ -79,7 +78,7 @@ class _ChatTextState extends State<ChatText> {
                       "월디는 말도 잘 알아 들어요!",
                       style: TextStyle(
                         fontFamily: "medium",
-                        fontSize: 16,
+                        fontSize: 14,
                         color: fromHex(GrayScale.Black),
                       ),
                     ),
@@ -90,7 +89,7 @@ class _ChatTextState extends State<ChatText> {
                       "궁금한 점을 아래 버튼을 누르고 적어주세요!",
                       style: TextStyle(
                         fontFamily: "medium",
-                        fontSize: 12,
+                        fontSize: 10,
                         color: fromHex(GrayScale.Black),
                       ),
                     ),
@@ -101,7 +100,7 @@ class _ChatTextState extends State<ChatText> {
                       "말로 물어보고 싶으면",
                       style: TextStyle(
                         fontFamily: "medium",
-                        fontSize: 12,
+                        fontSize: 10,
                         color: fromHex(GrayScale.Black),
                       ),
                     ),
@@ -112,7 +111,7 @@ class _ChatTextState extends State<ChatText> {
                       "\"말로 물어보기\"를 눌러주세요",
                       style: TextStyle(
                         fontFamily: "medium",
-                        fontSize: 12,
+                        fontSize: 10,
                         color: fromHex(GrayScale.Black),
                       ),
                     )
@@ -309,7 +308,6 @@ class _ChatTextState extends State<ChatText> {
                         msgNum: msgNum,
                         msgType: 0,
                         text: _textFormFieldValue);
-                    print(chatRequestVO.toJson());
                     getChat();
                     setState(() {
                       messageList.add(chatRequestVO);

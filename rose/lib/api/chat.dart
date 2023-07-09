@@ -38,7 +38,6 @@ class ChatApi {
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       late final responseBody = response.stream.bytesToString();
-      print(responseBody);
       return responseBody;
     } else {
       print(response.reasonPhrase);

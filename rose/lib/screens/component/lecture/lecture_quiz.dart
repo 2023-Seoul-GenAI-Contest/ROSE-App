@@ -57,7 +57,7 @@ class _LectureQuizState extends State<LectureQuiz> {
                           "강의 내용을 바탕으로 퀴즈를 만들었어요!",
                           style: TextStyle(
                             fontFamily: "medium",
-                            fontSize: 14,
+                            fontSize: 10,
                             color: fromHex(GrayScale.Black),
                           ),
                         ),
@@ -237,7 +237,7 @@ class _LectureQuizState extends State<LectureQuiz> {
                             "생성형 AI가 퀴즈를 만들고 있어요.",
                             style: TextStyle(
                               fontFamily: "medium",
-                              fontSize: 18,
+                              fontSize: 14,
                               color: fromHex(GrayScale.Black),
                             ),
                           ))),
